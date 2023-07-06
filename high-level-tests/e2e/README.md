@@ -126,6 +126,17 @@ npm run cy:run:local
 DATABASE_URL=postgresql://postgres@localhost/pix_test npm run cy:run
 ```
 
+
+#### Enregistrer une vidéo
+
+Utile si ça plante dans la CI
+```json
+  "numTestsKeptInMemory": 50,
+  "video": true,
+  "videoUploadOnPasses": false,
+
+```
+
 ### Écrire les tests
 
 #### Tests standard
