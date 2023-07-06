@@ -337,6 +337,8 @@ jobs:
             DATABASE_URL: 'postgres://circleci@localhost:5432/circleci'
             REDIS_URL: 'redis://localhost:6379'
             AUTH_SECRET: secret
+            LCMS_API_KEY: e5d7b101-d0bd-4a3b-86c9-61edd5d39e8d
+            LCMS_API_URL: 'https://lcms.minimal.pix.fr/api'
           background: true
           command: npm start
 
