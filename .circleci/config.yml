@@ -347,6 +347,7 @@ jobs:
           working_directory: ~/pix/mon-pix
           environment:
             JOBS: 1
+            FT_FOCUS_CHALLENGE_ENABLED: true
           background: true
           command: npm start
 
