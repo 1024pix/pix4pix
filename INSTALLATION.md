@@ -248,3 +248,10 @@ export DEBUG="pix:mailer:email"
 
 Cette variable d'environnement peut également être alimentée dans le fichier [.env](api/.env).
 
+
+
+## Bonus
+
+### Activer la CI
+Une configuration CircleCI est fournie, qui ne nécessite aucune variable d'environnement supplémentaire.
+Pour l'activer, se connecter à CircleCI et lancer un premier run.
