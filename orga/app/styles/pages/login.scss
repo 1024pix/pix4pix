@@ -28,7 +28,12 @@
 
     @include device-is('mobile') {
       padding: $pix-spacing-xl $pix-spacing-s;
-      border-radius: 0px;
     }
+  }
+}
+
+.login-page-header {
+  &__logo {
+    width: 220px;
   }
 }

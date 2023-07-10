@@ -10,6 +10,14 @@
     box-sizing: border-box;
     margin-bottom: 24px;
   }
+
+  &__image {
+    text-align: center;
+
+    img {
+      width: 220px;
+    }
+  }
 }
 
 .panel-header__headline {

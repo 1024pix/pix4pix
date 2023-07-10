@@ -4,6 +4,10 @@
   align-items: center;
   max-width: 440px;
 
+  @include device-is('mobile') {
+    width: 340px;
+  }
+
   &__information {
     @extend %pix-body-s;
 
