@@ -38,6 +38,7 @@ export default class UserLoggedMenu extends Component {
   @action
   closeMenu() {
     this.isMenuOpen = false;
+    this.args.close();
   }
 
   @action
