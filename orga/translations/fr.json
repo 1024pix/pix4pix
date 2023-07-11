@@ -236,6 +236,9 @@
     },
     "main": {
       "aria-label": "Navigation principale",
+      "button": {
+        "title": "Ouvrir le menu"
+      },
       "campaigns": "Campagnes",
       "certifications": "Certifications",
       "documentation": "Documentation",
@@ -249,7 +252,7 @@
       "aria-label": "Navigation de la section équipe"
     },
     "user-logged-menu": {
-      "button": "Ouvrir le menu utilisateur",
+      "button": "Sélectionner une organisation",
       "logout": "Se déconnecter"
     }
   },
@@ -984,7 +987,7 @@
       "table": {
         "column": {
           "date-of-birth": "Date de naissance",
-          "division":  {
+          "division": {
             "ariaLabelDefaultSort": "Le tableau n'est actuellement pas trié par classe. Cliquez pour trier par ordre alphanumérique.",
             "ariaLabelSortDown": "Le tableau est trié par classe, dans l'ordre alphanumérique inverse. Cliquez pour trier par ordre alphanumérique.",
             "ariaLabelSortUp": "Le tableau est trié par classe, dans l'ordre alphanumérique. Cliquez pour trier par ordre alphanumérique inverse.",
