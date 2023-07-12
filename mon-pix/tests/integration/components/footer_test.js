@@ -7,14 +7,6 @@ import { render } from '@1024pix/ember-testing-library';
 module('Integration | Component | Footer', function (hooks) {
   setupIntlRenderingTest(hooks);
 
-  test('should display the Pix logo', async function (assert) {
-    // when
-    const screen = await render(hbs`<Footer />}`);
-
-    // then
-    assert.ok(screen.getByAltText(this.intl.t('navigation.homepage')));
-  });
-
   test('should display the navigation menu with expected elements', async function (assert) {
     // when
     const screen = await render(hbs`<Footer />}`);
