@@ -20,7 +20,7 @@ module('Integration | Component | routes/campaigns/invited/fill-in-participant-e
     test('should display image help', async function (assert) {
       // when
       const campaign = {
-        externalIdHelpImageUrl: '/images/pix-logo.svg',
+        externalIdHelpImageUrl: '/images/platform-logo.png',
         alternativeTextToExternalIdHelpImage: 'alternative text',
       };
       this.set('campaign', campaign);
