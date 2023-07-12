@@ -64,6 +64,7 @@ Then(`je suis redirigé vers le profil de {string}`, (firstName) => {
 
 Then(`je suis redirigé vers le compte Orga de {string}`, (fullName) => {
   cy.url().should("include", "/campagnes");
+  cy.get('[aria-label="Navigation principale"]').click();
   cy.contains(fullName).should("be.visible");
   cy.get(".list-campaigns-page").should((list) => {
     expect(list).to.exist;
@@ -79,7 +80,7 @@ When(`je me déconnecte`, () => {
 });
 
 When(`je me déconnecte de Pix Orga`, () => {
-  cy.get('[aria-label="Ouvrir le menu utilisateur"]').click();
+  cy.get('[aria-label="Navigation principale"]').click();
   cy.contains("Se déconnecter").click();
 });
 

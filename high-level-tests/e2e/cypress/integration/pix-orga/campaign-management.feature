@@ -70,12 +70,14 @@ Fonctionnalité: Gestion des Campagnes
     Et je clique sur "Campagne du Mur"
     Et je clique sur "Paramètres"
     Lorsque je clique sur "Archiver"
+    Et que je clique sur "Ouvrir le menu"
     Et que je clique sur "Campagnes"
     Et que je clique sur "Archivées"
     Alors je vois 1 campagne
     Lorsque je clique sur "Campagne du Mur"
     Et je clique sur "Paramètres"
     Et que je clique sur "Désarchiver la campagne"
+    Et que je clique sur "Ouvrir le menu"
     Et que je clique sur "Campagnes"
     Et que je clique sur "Archivées"
     Alors je vois 0 campagne

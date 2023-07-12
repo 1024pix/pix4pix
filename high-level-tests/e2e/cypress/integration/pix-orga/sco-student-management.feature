@@ -5,6 +5,7 @@ Fonctionnalité: Gestion des élèves
     Étant donné que je vais sur Pix Orga
     Et que les données de test sont chargées
     Et que je me connecte avec le compte "john.snow@pix.fr"
+    Et que je clique sur "Ouvrir le menu"
     Et que je clique sur "Élèves"
 
   Scénario: J'affiche la liste des élèves
