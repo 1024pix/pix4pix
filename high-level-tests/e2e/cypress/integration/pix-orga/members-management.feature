@@ -32,6 +32,7 @@ Fonctionnalité: Gestion des membres d'une organisation
 
   Scénario: J'envoie une invitation à rejoindre Pix Orga
     Lorsque je suis connecté à Pix Orga
+    Et que je clique sur "Ouvrir le menu"
     Et je clique sur "Équipe"
     Alors je vois 1 invitation en attente
     Et je vois 1 membre
