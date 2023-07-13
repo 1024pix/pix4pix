@@ -23,7 +23,7 @@ module('Acceptance | Campaigns | Resume Campaigns with type Assessment', functio
   });
 
   module('When the user is not logged', function () {
-    test('should propose to signup', async function (assert) {
+    test('should propose to sign in', async function (assert) {
       // given
       await invalidateSession();
       const screen = await visit(`/campagnes/${campaign.code}`);
@@ -32,7 +32,7 @@ module('Acceptance | Campaigns | Resume Campaigns with type Assessment', functio
       await click(screen.getByRole('button', { name: 'Je commence' }));
 
       // then
-      assert.ok(currentURL().includes('/inscription'));
+      assert.ok(currentURL().includes('/connexion'));
     });
 
     test('should redirect to campaign participation when user logs in', async function (assert) {
@@ -40,7 +40,6 @@ module('Acceptance | Campaigns | Resume Campaigns with type Assessment', functio
       await invalidateSession();
       const screen = await visit(`/campagnes/${campaign.code}`);
       await click(screen.getByRole('button', { name: 'Je commence' }));
-      await click(screen.getByRole('link', { name: 'connectez-vous à votre compte' }));
       await fillIn(screen.getByRole('textbox', { name: 'Adresse e-mail ou identifiant' }), studentInfo.email);
       await fillIn(screen.getByLabelText('Mot de passe'), studentInfo.password);
 

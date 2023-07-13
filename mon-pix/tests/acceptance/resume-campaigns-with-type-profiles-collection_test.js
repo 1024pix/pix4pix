@@ -34,15 +34,13 @@ module('Acceptance | Campaigns | Resume Campaigns with type Profiles Collection'
       const screen = await visit(`/campagnes/${campaign.code}`);
       await click(screen.getByRole('button', { name: "C'est parti !" }));
 
-      assert.ok(currentURL().includes('/inscription'));
+      assert.ok(currentURL().includes('/connexion'));
     });
 
     test('should redirect to send profile page when user logs in', async function (assert) {
       // given
       const screen = await visit(`/campagnes/${campaign.code}`);
       await click(screen.getByRole('button', { name: "C'est parti !" }));
-
-      await click(screen.getByRole('link', { name: 'connectez-vous à votre compte' }));
       await fillIn(screen.getByRole('textbox', { name: 'Adresse e-mail ou identifiant' }), studentInfo.email);
       await fillIn(screen.getByLabelText('Mot de passe'), studentInfo.password);
 

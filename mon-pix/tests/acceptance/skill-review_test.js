@@ -386,7 +386,7 @@ module('Acceptance | Campaigns | Campaigns Result', function (hooks) {
       await clickByLabel(this.intl.t('pages.skill-review.actions.continue'));
 
       // then
-      assert.strictEqual(currentURL(), '/inscription');
+      assert.strictEqual(currentURL(), '/connexion');
     });
   });
 });

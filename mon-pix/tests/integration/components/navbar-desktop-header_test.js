@@ -35,14 +35,6 @@ module('Integration | Component | navbar-desktop-header', function (hooks) {
       assert.dom(screen.queryByRole('navigation', { name: this.intl.t('navigation.main.label') })).doesNotExist();
     });
 
-    test('should display link to signup page', async function (assert) {
-      // when
-      const screen = await render(hbs`<NavbarDesktopHeader/>`);
-
-      // then
-      assert.dom(screen.getByRole('link', { name: this.intl.t('navigation.not-logged.sign-up') })).exists();
-    });
-
     test('should display link to login page', async function (assert) {
       // when
       const screen = await render(hbs`<NavbarDesktopHeader/>`);

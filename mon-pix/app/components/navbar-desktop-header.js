@@ -22,7 +22,6 @@ export default class NavbarDesktopHeader extends Component {
         link: 'authentication.login',
         class: 'navbar-menu-signin-link',
       },
-      { name: this.intl.t('navigation.not-logged.sign-up'), link: 'inscription', class: 'navbar-menu-signup-link' },
     ];
   }
 

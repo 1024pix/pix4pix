@@ -36,7 +36,6 @@ export default class CurrentSessionService extends SessionService {
 
   async handleAuthentication() {
     await this._loadCurrentUserAndSetLocale();
-
     const nextURL = this.data.nextURL;
     const isFromIdentityProviderLoginPage = this.oidcIdentityProviders.list.some((identityProvider) => {
       const isUserLoggedInToIdentityProvider =

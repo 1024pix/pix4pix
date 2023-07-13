@@ -246,7 +246,7 @@ export default class SkillReview extends Component {
     event.preventDefault();
     if (this.currentUser.user.isAnonymous) {
       await this.session.invalidate();
-      this.router.transitionTo('inscription');
+      this.router.transitionTo('authentication');
     } else {
       this.router.transitionTo('authenticated');
     }

@@ -9,8 +9,6 @@ import { Response } from 'miragejs';
 import setupIntl from '../helpers/setup-intl';
 
 const PROFILES_COLLECTION = 'PROFILES_COLLECTION';
-const PASSWORD_INPUT_LABEL = 'Mot de passe (8 caractères minimum, dont une majuscule, une minuscule et un chiffre)';
-const EMAIL_INPUT_LABEL = 'Adresse e-mail (ex: nom@exemple.fr)';
 const FIRST_NAME_INPUT_LABEL = 'Prénom';
 const LAST_NAME_INPUT_LABEL = 'Nom';
 const DAY_BIRTH_INPUT_LABEL = 'jour de naissance';
@@ -37,12 +35,12 @@ module('Acceptance | Campaigns | Start Campaigns with type Profiles Collection',
             // then
             campaign = server.create('campaign', { type: PROFILES_COLLECTION, idPixLabel: 'Adresse e-mail' });
             const screen = await startCampaignByCode(campaign.code);
-            await fillIn(screen.getByRole('textbox', { name: FIRST_NAME_INPUT_LABEL }), campaignParticipant.firstName);
-            await fillIn(screen.getByRole('textbox', { name: LAST_NAME_INPUT_LABEL }), campaignParticipant.lastName);
-            await fillIn(screen.getByRole('textbox', { name: EMAIL_INPUT_LABEL }), campaignParticipant.email);
-            await fillIn(screen.getByLabelText(PASSWORD_INPUT_LABEL), campaignParticipant.password);
-            await click(screen.getByRole('checkbox', { name: this.intl.t('common.cgu.label') }));
-            await click(screen.getByRole('button', { name: "Je m'inscris" }));
+            await fillIn(
+              screen.getByRole('textbox', { name: 'Adresse e-mail ou identifiant' }),
+              campaignParticipant.email
+            );
+            await fillIn(screen.getByLabelText('Mot de passe'), campaignParticipant.password);
+            await click(screen.getByRole('button', { name: 'Je me connecte' }));
 
             // when
             await fillIn(screen.getByRole('textbox', { name: 'Adresse e-mail' }), 'monmail@truc.fr');
@@ -64,14 +62,11 @@ module('Acceptance | Campaigns | Start Campaigns with type Profiles Collection',
               });
               const screen = await startCampaignByCodeAndExternalId(campaign.code);
               await fillIn(
-                screen.getByRole('textbox', { name: FIRST_NAME_INPUT_LABEL }),
-                campaignParticipant.firstName
+                screen.getByRole('textbox', { name: 'Adresse e-mail ou identifiant' }),
+                campaignParticipant.email
               );
-              await fillIn(screen.getByRole('textbox', { name: LAST_NAME_INPUT_LABEL }), campaignParticipant.lastName);
-              await fillIn(screen.getByRole('textbox', { name: EMAIL_INPUT_LABEL }), campaignParticipant.email);
-              await fillIn(screen.getByLabelText(PASSWORD_INPUT_LABEL), campaignParticipant.password);
-              await click(screen.getByRole('checkbox', { name: this.intl.t('common.cgu.label') }));
-              await click(screen.getByRole('button', { name: "Je m'inscris" }));
+              await fillIn(screen.getByLabelText('Mot de passe'), campaignParticipant.password);
+              await click(screen.getByRole('button', { name: 'Je me connecte' }));
 
               // then
               assert.strictEqual(currentURL(), `/campagnes/${campaign.code}/collecte/envoi-profil`);
@@ -122,12 +117,12 @@ module('Acceptance | Campaigns | Start Campaigns with type Profiles Collection',
           // given & when
           campaign = server.create('campaign', { type: PROFILES_COLLECTION, idPixLabel: null });
           const screen = await startCampaignByCode(campaign.code);
-          await fillIn(screen.getByRole('textbox', { name: FIRST_NAME_INPUT_LABEL }), campaignParticipant.firstName);
-          await fillIn(screen.getByRole('textbox', { name: LAST_NAME_INPUT_LABEL }), campaignParticipant.lastName);
-          await fillIn(screen.getByRole('textbox', { name: EMAIL_INPUT_LABEL }), campaignParticipant.email);
-          await fillIn(screen.getByLabelText(PASSWORD_INPUT_LABEL), campaignParticipant.password);
-          await click(screen.getByRole('checkbox', { name: this.intl.t('common.cgu.label') }));
-          await click(screen.getByRole('button', { name: "Je m'inscris" }));
+          await fillIn(
+            screen.getByRole('textbox', { name: 'Adresse e-mail ou identifiant' }),
+            campaignParticipant.email
+          );
+          await fillIn(screen.getByLabelText('Mot de passe'), campaignParticipant.password);
+          await click(screen.getByRole('button', { name: 'Je me connecte' }));
 
           // then
           assert.strictEqual(currentURL(), `/campagnes/${campaign.code}/collecte/envoi-profil`);
@@ -139,14 +134,14 @@ module('Acceptance | Campaigns | Start Campaigns with type Profiles Collection',
           // given
           campaign = server.create('campaign', { type: PROFILES_COLLECTION });
           const screen = await startCampaignByCodeAndExternalId(campaign.code);
-          await fillIn(screen.getByRole('textbox', { name: FIRST_NAME_INPUT_LABEL }), campaignParticipant.firstName);
-          await fillIn(screen.getByRole('textbox', { name: LAST_NAME_INPUT_LABEL }), campaignParticipant.lastName);
-          await fillIn(screen.getByRole('textbox', { name: EMAIL_INPUT_LABEL }), campaignParticipant.email);
-          await fillIn(screen.getByLabelText(PASSWORD_INPUT_LABEL), campaignParticipant.password);
-          await click(screen.getByRole('checkbox', { name: this.intl.t('common.cgu.label') }));
+          await fillIn(
+            screen.getByRole('textbox', { name: 'Adresse e-mail ou identifiant' }),
+            campaignParticipant.email
+          );
+          await fillIn(screen.getByLabelText('Mot de passe'), campaignParticipant.password);
 
           // when
-          await click(screen.getByRole('button', { name: "Je m'inscris" }));
+          await click(screen.getByRole('button', { name: 'Je me connecte' }));
 
           // then
           assert.strictEqual(currentURL(), `/campagnes/${campaign.code}/collecte/envoi-profil`);

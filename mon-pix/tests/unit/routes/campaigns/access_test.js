@@ -55,7 +55,7 @@ module('Unit | Route | Access', function (hooks) {
 
       // then
 
-      assert.strictEqual(route.authenticationRoute, 'inscription');
+      assert.strictEqual(route.authenticationRoute, 'authentication');
     });
 
     test('should call parent’s beforeModel and transition to authenticationRoute', async function (assert) {
@@ -66,7 +66,7 @@ module('Unit | Route | Access', function (hooks) {
       sinon.assert.calledWith(
         sessionStub.requireAuthenticationAndApprovedTermsOfService,
         { from: 'campaigns.campaign-landing-page' },
-        'inscription'
+        'authentication'
       );
       assert.ok(true);
     });

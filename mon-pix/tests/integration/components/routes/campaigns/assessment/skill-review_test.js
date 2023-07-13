@@ -958,7 +958,7 @@ module('Integration | component | Campaigns | Evaluation | Skill Review', functi
   });
 
   module('#redirectToSignupIfUserIsAnonymous', function () {
-    test('should redirect to sign up page on click when user is anonymous', async function (assert) {
+    test('should redirect to sign in page on click when user is anonymous', async function (assert) {
       // given
       const event = {
         preventDefault: () => {},
@@ -978,7 +978,7 @@ module('Integration | component | Campaigns | Evaluation | Skill Review', functi
 
       // then
       sinon.assert.called(session.invalidate);
-      sinon.assert.calledWith(component.router.transitionTo, 'inscription');
+      sinon.assert.calledWith(component.router.transitionTo, 'authentication');
       assert.ok(true);
     });
 

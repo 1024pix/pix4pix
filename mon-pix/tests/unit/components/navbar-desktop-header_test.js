@@ -70,12 +70,11 @@ module('Unit | Component | Navbar Desktop Header Component', function (hooks) {
     module('#menu', function () {
       test('should set with default values (including connexion link)', function (assert) {
         // given
-        const expectedMenu = [{ link: 'authentication.login' }, { link: 'inscription' }];
+        const expectedMenu = [{ link: 'authentication.login' }];
 
         // then
         assert.strictEqual(component.menu.length, expectedMenu.length);
         assert.strictEqual(component.menu[0].link, expectedMenu[0].link);
-        assert.strictEqual(component.menu[1].link, expectedMenu[1].link);
       });
     });
 

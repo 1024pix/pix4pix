@@ -15,7 +15,7 @@ export default class AccessRoute extends Route {
       return this.router.replaceWith('campaigns.entry-point');
     }
 
-    this.authenticationRoute = 'inscription';
+    this.authenticationRoute = 'authentication';
     const campaign = this.modelFor('campaigns');
 
     const identityProviderToVisit = this.oidcIdentityProviders.list.find((identityProvider) => {

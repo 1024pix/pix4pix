@@ -38,7 +38,7 @@ module('Acceptance | Campaigns | Start Campaigns with type Assessment', function
             // given
             campaign = server.create('campaign', { idPixLabel: 'email', type: ASSESSMENT });
             const screen = await startCampaignByCode(campaign.code);
-            await _fillInputsToCreateUserPixAccount({ prescritUser, screen, intl: this.intl });
+            await _fillInputsToConnect({ prescritUser, screen, intl: this.intl });
 
             // when
             await fillIn(screen.getByRole('textbox', { name: 'email' }), 'monmail@truc.fr');
@@ -52,7 +52,7 @@ module('Acceptance | Campaigns | Start Campaigns with type Assessment', function
             // given
             campaign = server.create('campaign', { idPixLabel: 'email', type: ASSESSMENT });
             const screen = await startCampaignByCode(campaign.code);
-            await _fillInputsToCreateUserPixAccount({ prescritUser, screen, intl: this.intl });
+            await _fillInputsToConnect({ prescritUser, screen, intl: this.intl });
 
             // when
             await click(screen.getByRole('button', { name: 'Annuler' }));
@@ -68,7 +68,7 @@ module('Acceptance | Campaigns | Start Campaigns with type Assessment', function
               // given
               campaign = server.create('campaign', { isRestricted: false, idPixLabel: 'toto', type: ASSESSMENT });
               const screen = await startCampaignByCodeAndExternalId(campaign.code);
-              await _fillInputsToCreateUserPixAccount({ prescritUser, screen, intl: this.intl });
+              await _fillInputsToConnect({ prescritUser, screen, intl: this.intl });
 
               // when & then
               assert.ok(currentURL().includes('/didacticiel'));
@@ -115,7 +115,7 @@ module('Acceptance | Campaigns | Start Campaigns with type Assessment', function
           // given & when
           campaign = server.create('campaign', { idPixLabel: null, type: ASSESSMENT });
           const screen = await startCampaignByCode(campaign.code);
-          await _fillInputsToCreateUserPixAccount({ prescritUser, screen, intl: this.intl });
+          await _fillInputsToConnect({ prescritUser, screen });
 
           // then
           assert.ok(currentURL().includes('/didacticiel'));
@@ -127,7 +127,7 @@ module('Acceptance | Campaigns | Start Campaigns with type Assessment', function
           // given & when
           campaign = server.create('campaign', { type: ASSESSMENT });
           const screen = await startCampaignByCodeAndExternalId(campaign.code);
-          await _fillInputsToCreateUserPixAccount({ prescritUser, screen, intl: this.intl });
+          await _fillInputsToConnect({ prescritUser, screen });
 
           // then
           assert.ok(currentURL().includes('/didacticiel'));
@@ -141,7 +141,7 @@ module('Acceptance | Campaigns | Start Campaigns with type Assessment', function
           await visit(`/campagnes/${campaign.code}`);
 
           // then
-          assert.ok(currentURL().includes('/inscription'));
+          assert.ok(currentURL().includes('/connexion'));
         });
       });
     });
@@ -361,15 +361,9 @@ module('Acceptance | Campaigns | Start Campaigns with type Assessment', function
     });
   });
 
-  async function _fillInputsToCreateUserPixAccount({ prescritUser, screen, intl }) {
-    await fillIn(screen.getByRole('textbox', { name: 'Prénom' }), prescritUser.firstName);
-    await fillIn(screen.getByRole('textbox', { name: 'Nom' }), prescritUser.lastName);
-    await fillIn(screen.getByRole('textbox', { name: 'Adresse e-mail (ex: nom@exemple.fr)' }), prescritUser.email);
-    await fillIn(
-      screen.getByLabelText('Mot de passe (8 caractères minimum, dont une majuscule, une minuscule et un chiffre)'),
-      prescritUser.password
-    );
-    await click(screen.getByRole('checkbox', { name: intl.t('common.cgu.label') }));
-    await click(screen.getByRole('button', { name: intl.t('pages.sign-up.actions.submit') }));
+  async function _fillInputsToConnect({ prescritUser, screen }) {
+    await fillIn(screen.getByRole('textbox', { name: 'Adresse e-mail ou identifiant' }), prescritUser.email);
+    await fillIn(screen.getByLabelText('Mot de passe'), prescritUser.password);
+    await click(screen.getByRole('button', { name: 'Je me connecte' }));
   }
 });

@@ -60,12 +60,9 @@ module('Acceptance | Course ending screen', function (hooks) {
     assert.dom('.assessment-results__assessment-banner').exists();
   });
 
-  test('should display a button that redirects to inscription page', async function (assert) {
+  test('should display a button that redirects to connexion page', async function (assert) {
     assert.dom('.assessment-results__index-link__element').exists();
-    assert.strictEqual(
-      find('.assessment-results__index-a-link').attributes.href.value,
-      'https://app.pix.fr/inscription'
-    );
+    assert.strictEqual(find('.assessment-results__index-a-link').attributes.href.value, 'https://app.pix.fr/connexion');
     assert.ok(find('.assessment-results__link-back').textContent.includes('Continuer mon expérience Pix'));
   });
 });

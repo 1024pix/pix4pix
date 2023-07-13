@@ -63,67 +63,6 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
             // then
             assert.strictEqual(currentURL(), `/campagnes/${campaign.code}/presentation`);
           });
-
-          module('When user create its account', function () {
-            test('should send campaignCode to API', async function (assert) {
-              let sentCampaignCode;
-
-              const prescritUser = {
-                firstName: 'firstName',
-                lastName: 'lastName',
-                email: 'firstName.lastName@email.com',
-                password: 'Pix12345',
-              };
-
-              this.server.post(
-                '/users',
-                (schema, request) => {
-                  sentCampaignCode = JSON.parse(request.requestBody).meta['campaign-code'];
-                  return schema.users.create({});
-                },
-                201
-              );
-
-              // given
-              const campaign = server.create('campaign', { isRestricted: false });
-              const screen = await visit('/campagnes');
-              await fillIn(
-                screen.getByRole('textbox', { name: t('pages.fill-in-campaign-code.label') }),
-                campaign.code
-              );
-              await click(screen.getByRole('button', { name: 'Accéder au parcours' }));
-
-              // then
-              assert.strictEqual(currentURL(), `/campagnes/${campaign.code}/presentation`);
-
-              // when
-              await click(screen.getByRole('button', { name: 'Je commence' }));
-
-              // then
-              assert.strictEqual(currentURL(), '/inscription');
-
-              // when
-              await fillIn(screen.getByRole('textbox', { name: 'Prénom' }), prescritUser.firstName);
-              await fillIn(screen.getByRole('textbox', { name: 'Nom' }), prescritUser.lastName);
-              await fillIn(
-                screen.getByRole('textbox', { name: 'Adresse e-mail (ex: nom@exemple.fr)' }),
-                prescritUser.email
-              );
-              await fillIn(
-                screen.getByLabelText(
-                  'Mot de passe (8 caractères minimum, dont une majuscule, une minuscule et un chiffre)'
-                ),
-                prescritUser.password
-              );
-              await click(screen.getByRole('checkbox', { name: this.intl.t('common.cgu.label') }));
-
-              // when
-              await click(screen.getByRole('button', { name: this.intl.t('pages.sign-up.actions.submit') }));
-
-              // then
-              assert.strictEqual(sentCampaignCode, campaign.code);
-            });
-          });
         });
 
         module('When campaign is restricted and SCO', function (hooks) {
@@ -392,7 +331,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
             await click(screen.getByRole('button', { name: 'Je commence' }));
 
             // then
-            assert.strictEqual(currentURL(), '/inscription');
+            assert.strictEqual(currentURL(), '/connexion');
           });
 
           test('should redirect to invited sup student page after login', async function (assert) {
@@ -401,7 +340,6 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
             await click(screen.getByRole('button', { name: 'Je commence' }));
 
             // when
-            await click(screen.getByRole('link', { name: 'connectez-vous à votre compte' }));
             await fillIn(screen.getByRole('textbox', { name: 'Adresse e-mail ou identifiant' }), prescritUser.email);
             await fillIn(screen.getByLabelText('Mot de passe'), prescritUser.password);
 
@@ -475,7 +413,7 @@ module('Acceptance | Campaigns | Start Campaigns workflow', function (hooks) {
           await startCampaignByCode(campaign.code);
 
           // then
-          assert.strictEqual(currentURL(), '/inscription');
+          assert.strictEqual(currentURL(), '/connexion');
         });
       });
 

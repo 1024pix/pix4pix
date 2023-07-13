@@ -1000,7 +1000,7 @@ module('Unit | component | Campaigns | Evaluation | Skill Review', function (hoo
 
       // then
       sinon.assert.called(session.invalidate);
-      sinon.assert.calledWith(component.router.transitionTo, 'inscription');
+      sinon.assert.calledWith(component.router.transitionTo, 'authentication');
       assert.ok(true);
     });
 
