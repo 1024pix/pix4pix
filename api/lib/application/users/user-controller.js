@@ -22,28 +22,6 @@ import * as userLoginSerializer from '../../infrastructure/serializers/jsonapi/u
 import * as queryParamsUtils from '../../infrastructure/utils/query-params-utils.js';
 import * as requestResponseUtils from '../../infrastructure/utils/request-response-utils.js';
 import { usecases } from '../../domain/usecases/index.js';
-import * as localeService from '../../domain/services/locale-service.js';
-
-const save = async function (request, h, dependencies = { userSerializer, requestResponseUtils, localeService }) {
-  const localeFromCookie = request.state?.locale;
-  const canonicalLocaleFromCookie = localeFromCookie
-    ? dependencies.localeService.getCanonicalLocale(localeFromCookie)
-    : undefined;
-  const campaignCode = request.payload.meta ? request.payload.meta['campaign-code'] : null;
-  const user = { ...dependencies.userSerializer.deserialize(request.payload), locale: canonicalLocaleFromCookie };
-  const localeFromHeader = dependencies.requestResponseUtils.extractLocaleFromRequest(request);
-
-  const password = request.payload.data.attributes.password;
-
-  const savedUser = await usecases.createUser({
-    user,
-    password,
-    campaignCode,
-    localeFromHeader,
-  });
-
-  return h.response(dependencies.userSerializer.serialize(savedUser)).created();
-};
 
 const getCurrentUser = function (request, h, dependencies = { userWithActivitySerializer }) {
   const authenticatedUserId = request.auth.credentials.userId;
@@ -437,7 +415,6 @@ const rememberUserHasSeenLastDataProtectionPolicyInformation = async function (
 };
 
 const userController = {
-  save,
   getCurrentUser,
   getUserDetailsForAdmin,
   updatePassword,

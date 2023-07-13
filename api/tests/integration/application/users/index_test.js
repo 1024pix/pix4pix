@@ -1,4 +1,4 @@
-import { expect, sinon, HttpTestServer, knex } from '../../../test-helper.js';
+import { expect, sinon, HttpTestServer } from '../../../test-helper.js';
 import { securityPreHandlers } from '../../../../lib/application/security-pre-handlers.js';
 import { userController } from '../../../../lib/application/users/user-controller.js';
 import * as moduleUnderTest from '../../../../lib/application/users/index.js';
@@ -22,56 +22,6 @@ describe('Integration | Application | Users | Routes', function () {
 
     httpTestServer = new HttpTestServer();
     await httpTestServer.register(moduleUnderTest);
-  });
-
-  describe('POST /api/users', function () {
-    afterEach(async function () {
-      await knex('authentication-methods').delete();
-      await knex('users').delete();
-    });
-
-    context('when user create account before joining campaign', function () {
-      it('should return HTTP 201', async function () {
-        // given / when
-        const response = await httpTestServer.request('POST', '/api/users', {
-          data: {
-            attributes: {
-              'first-name': 'marine',
-              'last-name': 'test',
-              email: 'test1@example.net',
-              username: null,
-              password: 'Password123',
-              cgu: true,
-              'must-validate-terms-of-service': false,
-              'has-seen-assessment-instructions': false,
-              'has-seen-new-dashboard-info': false,
-              lang: 'fr',
-              'is-anonymous': false,
-            },
-            type: 'users',
-          },
-          meta: {
-            'campaign-code': 'TRWYWV411',
-          },
-        });
-
-        // then
-        expect(response.statusCode).to.equal(201);
-      });
-
-      it('should return HTTP 400', async function () {
-        // given
-        const payload = {};
-
-        const url = '/api/users';
-
-        // when
-        const response = await httpTestServer.request('POST', url, payload);
-
-        // then
-        expect(response.statusCode).to.equal(400);
-      });
-    });
   });
 
   describe('POST /api/users/{userId}/competences/{competenceId}/reset', function () {

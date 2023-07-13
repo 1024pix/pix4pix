@@ -7,42 +7,6 @@ import * as moduleUnderTest from '../../../../lib/application/users/index.js';
 import { NON_OIDC_IDENTITY_PROVIDERS } from '../../../../lib/domain/constants/identity-providers.js';
 
 describe('Unit | Router | user-router', function () {
-  describe('POST /api/users', function () {
-    const method = 'POST';
-    const url = '/api/users';
-
-    context('Payload schema validation', function () {
-      it('should return HTTP 400 if payload does not exist', async function () {
-        // given
-        const httpTestServer = new HttpTestServer();
-        await httpTestServer.register(moduleUnderTest);
-
-        const payload = null;
-
-        // when
-        const result = await httpTestServer.request(method, url, payload);
-
-        // then
-        expect(result.statusCode).to.equal(400);
-      });
-
-      it('should return HTTP 200 if payload is not empty and valid', async function () {
-        // given
-        sinon.stub(userController, 'save').returns('ok');
-        const httpTestServer = new HttpTestServer();
-        await httpTestServer.register(moduleUnderTest);
-
-        const payload = { data: { attributes: {} } };
-
-        // when
-        const result = await httpTestServer.request(method, url, payload);
-
-        // then
-        expect(result.statusCode).to.equal(200);
-      });
-    });
-  });
-
   describe('GET /api/users/me', function () {
     const method = 'GET';
 
