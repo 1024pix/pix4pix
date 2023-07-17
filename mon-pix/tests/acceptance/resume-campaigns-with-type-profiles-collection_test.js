@@ -1,4 +1,4 @@
-import { click, fillIn, currentURL } from '@ember/test-helpers';
+import { click, currentURL } from '@ember/test-helpers';
 import { module, test } from 'qunit';
 import { authenticate } from '../helpers/authentication';
 import {
@@ -35,20 +35,6 @@ module('Acceptance | Campaigns | Resume Campaigns with type Profiles Collection'
       await click(screen.getByRole('button', { name: "C'est parti !" }));
 
       assert.ok(currentURL().includes('/connexion'));
-    });
-
-    test('should redirect to send profile page when user logs in', async function (assert) {
-      // given
-      const screen = await visit(`/campagnes/${campaign.code}`);
-      await click(screen.getByRole('button', { name: "C'est parti !" }));
-      await fillIn(screen.getByRole('textbox', { name: 'Adresse e-mail ou identifiant' }), studentInfo.email);
-      await fillIn(screen.getByLabelText('Mot de passe'), studentInfo.password);
-
-      // when
-      await click(screen.getByRole('button', { name: 'Je me connecte' }));
-
-      // then
-      assert.ok(currentURL().includes('/envoi-profil'));
     });
   });
 

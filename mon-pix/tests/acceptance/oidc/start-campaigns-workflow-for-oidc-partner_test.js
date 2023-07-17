@@ -12,7 +12,7 @@ import { clickByLabel } from '../../helpers/click-by-label';
 import sinon from 'sinon';
 import Service from '@ember/service';
 
-import { authenticateByEmail } from '../../helpers/authentication';
+import { authenticate } from '../../helpers/authentication';
 import { currentSession } from 'ember-simple-auth/test-support';
 import setupIntl from '../../helpers/setup-intl';
 import { t } from 'ember-intl/test-support';
@@ -122,7 +122,8 @@ module('Acceptance | Campaigns | Start Campaigns workflow | OIDC', function (hoo
           mustValidateTermsOfService: false,
           lastTermsOfServiceValidatedAt: null,
         });
-        await authenticateByEmail(prescritUser);
+        await authenticate(prescritUser);
+        await visit('/');
         replaceLocationStub = sinon.stub().resolves();
         this.owner.register(
           'service:location',

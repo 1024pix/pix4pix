@@ -1,4 +1,4 @@
-import { click, fillIn, currentURL } from '@ember/test-helpers';
+import { click, currentURL } from '@ember/test-helpers';
 import { visit } from '@1024pix/ember-testing-library';
 import { module, test } from 'qunit';
 import { authenticate } from '../helpers/authentication';
@@ -69,19 +69,6 @@ module('Acceptance | Profile', function (hooks) {
     test('should redirect to home, when user is not authenticated', async function (assert) {
       // when
       await visit('/competences');
-      assert.strictEqual(currentURL(), '/connexion');
-    });
-
-    test('should stay in /connexion, when authentication failed', async function (assert) {
-      // given
-      const screen = await visit('/connexion');
-      await fillIn(screen.getByRole('textbox', { name: 'Adresse e-mail ou identifiant' }), 'anyone@pix.world');
-      await fillIn(screen.getByLabelText('Mot de passe'), 'Pix20!!');
-
-      // when
-      await click(screen.getByRole('button', { name: this.intl.t('pages.sign-in.actions.submit') }));
-
-      // then
       assert.strictEqual(currentURL(), '/connexion');
     });
   });

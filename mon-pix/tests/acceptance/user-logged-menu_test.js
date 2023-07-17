@@ -1,6 +1,7 @@
 import { click, currentURL } from '@ember/test-helpers';
 import { module, test } from 'qunit';
-import { authenticateByEmail } from '../helpers/authentication';
+import { visit } from '@1024pix/ember-testing-library';
+import { authenticate } from '../helpers/authentication';
 import { setupApplicationTest } from 'ember-qunit';
 import { setupMirage } from 'ember-cli-mirage/test-support';
 
@@ -13,7 +14,8 @@ module('Acceptance | User account', function (hooks) {
       //given
       server.create('campaign-participation-overview', { assessmentState: 'completed' });
       const user = server.create('user', 'withEmail', 'withAssessmentParticipations', { firstName: 'Henri' });
-      const screen = await authenticateByEmail(user);
+      await authenticate(user);
+      const screen = await visit('/');
 
       // when
       await click(screen.getByRole('button', { name: 'Henri Consulter mes informations' }));
@@ -27,7 +29,8 @@ module('Acceptance | User account', function (hooks) {
       //given
       server.create('campaign-participation-overview', { assessmentState: 'completed' });
       const user = server.create('user', 'withEmail', 'withAssessmentParticipations', { firstName: 'Henri' });
-      const screen = await authenticateByEmail(user);
+      await authenticate(user);
+      const screen = await visit('/');
 
       // when
       await click(screen.getByRole('button', { name: 'Henri Consulter mes informations' }));
@@ -41,7 +44,8 @@ module('Acceptance | User account', function (hooks) {
       // given
       server.create('campaign-participation-overview', { assessmentState: 'completed' });
       const user = server.create('user', 'withEmail', 'withAssessmentParticipations', { firstName: 'Henri' });
-      const screen = await authenticateByEmail(user);
+      await authenticate(user);
+      const screen = await visit('/');
 
       // when
       await click(screen.getByRole('button', { name: 'Henri Consulter mes informations' }));
@@ -55,7 +59,8 @@ module('Acceptance | User account', function (hooks) {
       //given
       server.create('campaign-participation-overview', { assessmentState: 'completed' });
       const user = server.create('user', 'withEmail', 'withAssessmentParticipations', { firstName: 'Henri' });
-      const screen = await authenticateByEmail(user);
+      await authenticate(user);
+      const screen = await visit('/');
       await click(screen.getByRole('button', { name: 'Henri Consulter mes informations' }));
 
       // when
@@ -70,7 +75,8 @@ module('Acceptance | User account', function (hooks) {
     // given
     server.create('campaign-participation-overview', { assessmentState: 'completed' });
     const user = server.create('user', 'withEmail', 'withAssessmentParticipations', { firstName: 'Henri' });
-    const screen = await authenticateByEmail(user);
+    await authenticate(user);
+    const screen = await visit('/');
     await click(screen.getByRole('button', { name: 'Henri Consulter mes informations' }));
 
     // when

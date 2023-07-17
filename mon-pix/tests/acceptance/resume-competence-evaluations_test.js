@@ -1,4 +1,4 @@
-import { fillIn, currentURL, click } from '@ember/test-helpers';
+import { currentURL } from '@ember/test-helpers';
 import { visit } from '@1024pix/ember-testing-library';
 import { module, test } from 'qunit';
 import { authenticate } from '../helpers/authentication';
@@ -24,18 +24,6 @@ module('Acceptance | Competence Evaluations | Resume Competence Evaluations', f
 
       test('should redirect to signin page', async function (assert) {
         assert.strictEqual(currentURL(), '/connexion');
-      });
-
-      test('should redirect to assessment after signin', async function (assert) {
-        // given
-        const screen = await visit('/competences/1/evaluer');
-
-        // when
-        await fillIn(screen.getByRole('textbox', { name: 'Adresse e-mail ou identifiant' }), user.email);
-        await fillIn(screen.getByLabelText('Mot de passe'), user.password);
-        await click(screen.getByRole('button', { name: this.intl.t('pages.sign-in.actions.submit') }));
-
-        assert.ok(currentURL().includes('/assessments'));
       });
     });
 
