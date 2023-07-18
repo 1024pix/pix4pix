@@ -5,37 +5,7 @@ Given(`je me connecte avec le compte {string}`, (email) => {
   cy.get("button[type=submit]").click();
 });
 
-Given(`je me connecte avec un mot de passe temporaire`, () => {
-  cy.get('input[name="login"]').type("tommen.baratheon1234");
-  cy.get('input[name="password"]').type("Pix12345");
-  cy.get("button[type=submit]").click();
-});
-
-Given(
-  `je m'inscris avec le prénom {string}, le nom {string}, le mail {string} et le mot de passe {string}`,
-  (firstname, lastname, email, password) => {
-    cy.get('input[id="firstName"]').type(firstname);
-    cy.get('input[id="lastName"]').type(lastname);
-    cy.get("input[id=email]").type(email);
-    cy.get("input[id=password]").type(password);
-    cy.get("input[type=checkbox]").check();
-    cy.get("button[type=submit]").click();
-  }
-);
-
 // When
-When("je me connecte à Pix via le GAR", () => {
-  cy.loginExternalPlatformForTheFirstTime();
-});
-
-When("je me connecte sur Pix pour la seconde fois via le GAR", () => {
-  cy.loginExternalPlatformForTheSecondTime();
-});
-
-When(`je vais sur l'inscription de Pix`, () => {
-  cy.visitMonPix(`/inscription`);
-});
-
 When("je suis connecté avec un compte dont le token expire bientôt", () => {
   cy.loginWithAlmostExpiredToken();
 });

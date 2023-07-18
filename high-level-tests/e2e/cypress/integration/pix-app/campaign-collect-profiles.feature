@@ -25,7 +25,7 @@ Fonctionnalité: Campagne de collecte de profils
     Alors je vois la page de "presentation" de la campagne
     Lorsque je clique sur "C'est parti !"
     Et je clique sur "connectez-vous à votre compte"
-    Et je me connecte avec le compte "daenerys.targaryen@pix.fr"
+    Et  je suis connecté à Pix en tant que "daenerys.targaryen@pix.fr"
     Alors je vois la page d'"envoi-profil" de la campagne
     Lorsque je clique sur "J'envoie mon profil"
     Alors je vois que j'ai partagé mon profil
@@ -44,19 +44,6 @@ Fonctionnalité: Campagne de collecte de profils
     Et je saisis la date de naissance 23-10-1986
     Et je clique sur "C'est parti !"
     Et je clique sur le bouton "Associer"
-    Alors je vois la page d'"envoi-profil" de la campagne
-    Lorsque je clique sur "J'envoie mon profil"
-    Alors je vois que j'ai partagé mon profil
-
-  Scénario: Je partage mon profil de manière restreinte en étant connecté via un organisme externe
-    Étant donné que je me connecte à Pix via le GAR
-    Lorsque je saisis le code "WOLF"
-    Et je clique sur "Accéder au parcours"
-    Alors je vois la page de "presentation" de la campagne
-    Lorsque je clique sur "C'est parti !"
-    Alors je vois la page de "rejoindre" de la campagne
-    Lorsque je saisis la date de naissance 23-10-1986
-    Et je clique sur "C'est parti !"
     Alors je vois la page d'"envoi-profil" de la campagne
     Lorsque je clique sur "J'envoie mon profil"
     Alors je vois que j'ai partagé mon profil

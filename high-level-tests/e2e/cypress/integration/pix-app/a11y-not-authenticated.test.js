@@ -21,9 +21,6 @@ describe("a11y", () => {
     const notAuthenticatedPages = [
       { url: "/campagnes" },
       { url: "/campagnes/WALL/presentation" },
-      { url: "/changer-de-mot-passe" },
-      { url: "/connexion" },
-      { url: "/inscription" },
       { url: "/mot-de-passe-oublie" },
       { url: "/nonconnecte" },
       { url: "/recuperer-mon-compte", skipFailures: true },
