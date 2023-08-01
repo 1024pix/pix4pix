@@ -50,17 +50,14 @@ export default class LoginOidcRoute extends Route {
     }
   }
 
-  afterModel({ shouldValidateCgu, authenticationKey, identityProviderSlug, givenName, familyName } = {}) {
+  afterModel({ shouldValidateCgu, authenticationKey } = {}) {
     const shouldCreateAnAccountForUser = shouldValidateCgu && authenticationKey;
 
     if (!shouldCreateAnAccountForUser) return;
 
-    return this.router.replaceWith('authentication.login-or-register-oidc', {
+    return this.router.replaceWith('login', {
       queryParams: {
-        authenticationKey,
-        identityProviderSlug,
-        givenName,
-        familyName,
+        isUserShouldCreateAnAccount: true,
       },
     });
   }
@@ -80,9 +77,9 @@ export default class LoginOidcRoute extends Route {
       const error = new JSONApiError(apiError.detail, apiError);
 
       const shouldValidateCgu = error.code === 'SHOULD_VALIDATE_CGU';
-      const { authenticationKey, givenName, familyName } = error.meta ?? {};
+      const { authenticationKey } = error.meta ?? {};
       if (shouldValidateCgu && authenticationKey) {
-        return { shouldValidateCgu, authenticationKey, identityProviderSlug, givenName, familyName };
+        return { shouldValidateCgu, authenticationKey };
       }
 
       throw error;

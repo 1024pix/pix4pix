@@ -10,3 +10,11 @@
   <img src="/google-logo.svg" alt="" role="presentation" />
   <span>Se connecter avec Google</span>
 </LinkTo>
+
+{{#if @isUserShouldCreateAnAccount}}
+  <PixMessage @type="alert">
+    Vous n'avez pas de compte Pix.
+    <br />
+    Veuillez créer un compte sur Pix App et demander les droits pour accéder à Pix Admin.
+  </PixMessage>
+{{/if}}
