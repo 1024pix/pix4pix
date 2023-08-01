@@ -18,3 +18,9 @@
     Veuillez créer un compte sur Pix App et demander les droits pour accéder à Pix Admin.
   </PixMessage>
 {{/if}}
+
+{{#if @isUserShouldRequestAccess}}
+  <PixMessage @type="alert">
+    Vous n'avez pas les droits pour vous connecter.
+  </PixMessage>
+{{/if}}

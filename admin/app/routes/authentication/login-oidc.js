@@ -82,6 +82,14 @@ export default class LoginOidcRoute extends Route {
         return { shouldValidateCgu, authenticationKey };
       }
 
+      if (error.status === '403') {
+        return this.router.replaceWith('login', {
+          queryParams: {
+            isUserShouldRequestAccess: true,
+          },
+        });
+      }
+
       throw error;
     } finally {
       this.session.set('data.state', undefined);
