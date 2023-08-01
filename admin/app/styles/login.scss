@@ -32,25 +32,12 @@
 }
 
 .login-form {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  max-width: 440px;
-  width: 440px;
-
-  &__title {
-    @extend %pix-title-m;
-
-    font-family: $font-open-sans;
-    font-weight: $font-normal;
-    color: $pix-neutral-80;
-    margin-top: $pix-spacing-m;
-  }
 
   &__information {
     text-align: center;
     color: $pix-neutral-80;
     font-size: 0.875rem;
+    padding-bottom: 30px;
   }
 
   &__header {
@@ -60,13 +47,33 @@
   &__logo {
     width: 220px;
   }
-}
 
-.login-form__error {
-  color: $pix-error-70;
-  padding: 8px 0;
+  &__oidc-connect-link {
+    display: flex;
+    align-items: center;
+    padding: 7px 10px 7px 13px;
+    font-weight: bold;
+    font-size: 14px;
+    text-decoration: none;
+    border: 2px solid transparent;
+    border-radius: 100px;
+    box-shadow: 0 0 0 2px $pix-neutral-70;
 
-  & a {
-    text-decoration: underline;
+    &:focus,
+    &:hover,
+    &:focus-within {
+      background-color: $pix-neutral-15;
+      border: 2px solid $pix-neutral-0;
+      box-shadow: 0 0 0 2px $pix-neutral-70;
+    }
+
+    img {
+      width: 30px;
+    }
+
+    span {
+      padding: 0 3px 0 10px;
+    }
   }
 }
+

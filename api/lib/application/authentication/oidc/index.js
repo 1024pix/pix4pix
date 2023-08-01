@@ -77,6 +77,7 @@ const register = async function (server) {
                 redirect_uri: Joi.string().required(),
                 state_sent: Joi.string().required(),
                 state_received: Joi.string().required(),
+                scope: Joi.string(),
               },
             },
           }),
@@ -151,6 +152,8 @@ const register = async function (server) {
           payload: Joi.object({
             data: Joi.object({
               attributes: Joi.object({
+                email: Joi.string().email().required(),
+                password: Joi.string().required(),
                 identity_provider: Joi.string()
                   .required()
                   .valid(...validOidcProviderCodes),

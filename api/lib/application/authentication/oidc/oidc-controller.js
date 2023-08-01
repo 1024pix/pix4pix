@@ -54,11 +54,15 @@ const reconcileUser = async function (
     authenticationServiceRegistry,
   }
 ) {
-  const { identityProvider, authenticationKey } = request.deserializedPayload;
+  const { email, password, identityProvider, authenticationKey } = request.deserializedPayload;
+
   const oidcAuthenticationService =
     dependencies.authenticationServiceRegistry.getOidcProviderServiceByCode(identityProvider);
 
   const result = await usecases.reconcileOidcUser({
+    email,
+    password,
+    identityProvider,
     authenticationKey,
     oidcAuthenticationService,
   });
@@ -87,7 +91,7 @@ const authenticateUser = async function (
     authenticationServiceRegistry,
   }
 ) {
-  const { code, identityProvider, redirectUri, stateSent, stateReceived } = request.deserializedPayload;
+  const { code, identityProvider, redirectUri, stateSent, stateReceived, scope } = request.deserializedPayload;
 
   const oidcAuthenticationService =
     dependencies.authenticationServiceRegistry.getOidcProviderServiceByCode(identityProvider);
@@ -98,6 +102,7 @@ const authenticateUser = async function (
     stateReceived,
     stateSent,
     oidcAuthenticationService,
+    scope,
   });
 
   if (result.isAuthenticationComplete) {

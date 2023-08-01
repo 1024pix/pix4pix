@@ -1,10 +1,14 @@
-import { AuthenticationKeyExpired, MissingUserAccountError } from '../errors.js';
-import { AuthenticationMethod } from '../models/AuthenticationMethod.js';
+import { AuthenticationKeyExpired, DifferentExternalIdentifierError } from '../errors.js';
+import { AuthenticationMethod } from '../models/index.js';
 
 const reconcileOidcUser = async function ({
+  email,
+  password,
+  identityProvider,
   authenticationKey,
   oidcAuthenticationService,
   authenticationSessionService,
+  pixAuthenticationService,
   authenticationMethodRepository,
   userRepository,
 }) {
@@ -13,12 +17,27 @@ const reconcileOidcUser = async function ({
     throw new AuthenticationKeyExpired();
   }
 
-  const { userInfo, sessionContent } = sessionContentAndUserInfo;
-  if (!userInfo?.userId) {
-    throw new MissingUserAccountError();
+  const foundUser = await pixAuthenticationService.getUserByUsernameAndPassword({
+    username: email,
+    password,
+    userRepository,
+  });
+
+  const authenticationMethods = await authenticationMethodRepository.findByUserId({ userId: foundUser.id });
+  const oidcAuthenticationMethod = authenticationMethods.find(
+    (authenticationMethod) => authenticationMethod.identityProvider === identityProvider
+  );
+
+  const isSameExternalIdentifier =
+    oidcAuthenticationMethod?.externalIdentifier === sessionContentAndUserInfo.userInfo.externalIdentityId;
+  if (oidcAuthenticationMethod && !isSameExternalIdentifier) {
+    throw new DifferentExternalIdentifierError();
   }
 
-  const { userId, externalIdentityId } = userInfo;
+  const userId = foundUser.id;
+
+  const { userInfo, sessionContent } = sessionContentAndUserInfo;
+  const { externalIdentityId } = userInfo;
 
   const authenticationComplement = oidcAuthenticationService.createAuthenticationComplement({ sessionContent });
   await authenticationMethodRepository.create({
